@@ -16,10 +16,7 @@ import Checkout from './pages/Checkout'
 import Perfil from './pages/Perfil'
 import TermsAndConditions from './pages/TermsAndConditions'
 import UserGuide from './pages/UserGuide'
-<<<<<<< HEAD
 import AdminSubscriptions from './pages/AdminSubscriptions'
-=======
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
 import TrialCheck from './components/TrialCheck'
 
 function App() {
@@ -59,7 +56,6 @@ function App() {
             <Route path="/terminos" element={<TermsAndConditions />} />
             <Route path="/instrucciones" element={<UserGuide />} />
             <Route
-<<<<<<< HEAD
               path="/admin/suscripciones"
               element={
                 <ProtectedRoute>
@@ -68,8 +64,6 @@ function App() {
               }
             />
             <Route
-=======
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
               path="/perfil"
               element={
                 <ProtectedRoute>
