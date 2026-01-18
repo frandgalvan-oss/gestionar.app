@@ -21,7 +21,11 @@ const DashboardPreview = () => {
         {/* Dashboard Image - Full Width */}
         <div className="relative animate-fade-in">
           {/* Main container */}
+<<<<<<< HEAD
           <div className="relative rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl border border-gray-200 bg-white hover:shadow-3xl hover:scale-[1.01] transition-all duration-500">
+=======
+          <div className="relative rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl border border-gray-200 bg-white">
+>>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
             <img 
               src="/dashboard-preview.png" 
               alt="Dashboard de Gestión Empresarial - Sistema de Gestión con IA"
@@ -46,7 +50,11 @@ const DashboardPreview = () => {
           </p>
           <a
             href="/register"
+<<<<<<< HEAD
             className="group inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-gray-800 hover:-translate-y-0.5 transition-all shadow-lg w-full sm:w-auto"
+=======
+            className="group inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors shadow-lg w-full sm:w-auto"
+>>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
           >
             <span>Comenzar Ahora</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
