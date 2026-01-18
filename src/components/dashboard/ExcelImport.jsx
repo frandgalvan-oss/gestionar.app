@@ -96,7 +96,7 @@ expense,COMP-001,2024-03-15,8500.00,Compra de insumos,Gastos Operativos`
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent inline-block pb-2">Importar</span> desde Excel
+            <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent inline-block pb-2">Importar</span> desde Excel
           </h2>
           <p className="text-gray-600 mt-1">Carga masiva de facturas desde archivos Excel o CSV</p>
         </div>

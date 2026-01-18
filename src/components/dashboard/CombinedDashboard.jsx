@@ -1154,10 +1154,10 @@ const CombinedDashboard = ({ invoices, companyData, isEmprendedor = false }) => 
                         </div>
 
                         {/* 5. Cash Flow */}
-                        <div className="bg-gradient-to-br from-cyan-50 to-white border border-cyan-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                        <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
                           <div className="flex items-center justify-between mb-3">
-                            <div className="p-2 bg-cyan-100 rounded-lg">
-                              <Activity className="w-6 h-6 text-cyan-600" />
+                            <div className="p-2 bg-blue-100 rounded-lg">
+                              <Activity className="w-6 h-6 text-blue-600" />
                             </div>
                           </div>
                           <p className="text-sm font-medium text-gray-600 mb-1">Cash Flow</p>
@@ -1221,7 +1221,7 @@ const CombinedDashboard = ({ invoices, companyData, isEmprendedor = false }) => 
                               <span className="text-green-600 font-medium">
                                 Ingresos: ${monthData.income.toLocaleString('es-AR', { maximumFractionDigits: 0 })}
                               </span>
-                              <span className={`font-medium ${monthData.profit >= 0 ? 'text-cyan-600' : 'text-red-600'}`}>
+                              <span className={`font-medium ${monthData.profit >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
                                 Ganancia: ${Math.abs(monthData.profit).toLocaleString('es-AR', { maximumFractionDigits: 0 })}
                               </span>
                             </div>
@@ -1366,7 +1366,7 @@ const CombinedDashboard = ({ invoices, companyData, isEmprendedor = false }) => 
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm font-medium text-gray-600">Utilidad Neta</p>
-                    <Activity className="w-5 h-5 text-cyan-600" />
+                    <Activity className="w-5 h-5 text-blue-600" />
                   </div>
                   <p className={`text-3xl font-bold ${autoCharts.summary.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                     ${autoCharts.summary.profit.toLocaleString('es-AR', { maximumFractionDigits: 0 })}

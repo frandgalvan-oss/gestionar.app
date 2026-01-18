@@ -74,7 +74,7 @@ const CommandBoard = ({ invoices, companyData }) => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent inline-block pb-2">Tablero</span> de Comando
+            <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent inline-block pb-2">Tablero</span> de Comando
           </h2>
           <p className="text-gray-600 mt-1">Vista ejecutiva de métricas clave</p>
         </div>

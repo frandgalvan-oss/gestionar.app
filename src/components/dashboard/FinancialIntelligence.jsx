@@ -1271,7 +1271,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
               <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-medium text-gray-600">Nuevos Clientes</p>
-                  <Sparkles className="w-6 h-6 text-cyan-600" />
+                  <Sparkles className="w-6 h-6 text-blue-600" />
                 </div>
                 <p className="text-4xl font-bold text-gray-900">{clientAnalysis.nuevosClientesMesActual}</p>
                 <div className="flex items-center gap-2 mt-2">
@@ -2970,7 +2970,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                             <div className="flex justify-between items-center">
                               <div className="flex items-center gap-2">
                                 <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
-                                  isTop3 ? 'bg-cyan-500 text-white' : 'bg-gray-200 text-gray-600'
+                                  isTop3 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
                                 }`}>
                                   {index + 1}
                                 </span>
@@ -2981,7 +2981,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                             <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                               <div 
                                 className={`h-3 rounded-full transition-all duration-500 ${
-                                  isTop3 ? 'bg-cyan-500' : 'bg-gray-900'
+                                  isTop3 ? 'bg-blue-500' : 'bg-gray-900'
                                 }`}
                                 style={{ width: `${width}%` }}
                               />
@@ -3104,7 +3104,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                             <div className="flex justify-between items-center">
                               <div className="flex items-center gap-2">
                                 <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
-                                  isTop3 ? 'bg-cyan-500 text-white' : 'bg-gray-200 text-gray-600'
+                                  isTop3 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
                                 }`}>
                                   {index + 1}
                                 </span>
@@ -3115,7 +3115,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                             <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                               <div 
                                 className={`h-3 rounded-full transition-all duration-500 ${
-                                  isTop3 ? 'bg-cyan-500' : 'bg-gray-900'
+                                  isTop3 ? 'bg-blue-500' : 'bg-gray-900'
                                 }`}
                                 style={{ width: `${width}%` }}
                               />
@@ -4454,7 +4454,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
               {/* Distribución por Modelos */}
               <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-md">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2.5 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl border border-cyan-200">
+                  <div className="p-2.5 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl border border-blue-200">
                     <Package className="w-5 h-5 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent" />
                   </div>
                   <div>
@@ -5216,7 +5216,7 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                                 <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
                                   <div
                                     className={`h-3 rounded-full transition-all duration-500 ${
-                                      data.gananciaBruta >= 0 ? 'bg-cyan-500' : 'bg-orange-500'
+                                      data.gananciaBruta >= 0 ? 'bg-blue-500' : 'bg-orange-500'
                                     }`}
                                     style={{ width: `${(Math.abs(data.gananciaBruta) / maxValue) * 100}%` }}
                                   />
@@ -5346,9 +5346,9 @@ const FinancialIntelligence = ({ invoices, companyData, isEmprendedor = false })
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between p-4 bg-cyan-50 rounded-lg">
+                      <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
                         <div className="flex items-center gap-3">
-                          <div className="w-4 h-4 rounded-full bg-cyan-500" />
+                          <div className="w-4 h-4 rounded-full bg-blue-500" />
                           <span className="text-sm font-medium text-gray-700">Ganancia Bruta</span>
                         </div>
                         <div className="text-right">

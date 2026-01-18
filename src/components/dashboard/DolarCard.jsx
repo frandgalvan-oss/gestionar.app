@@ -146,7 +146,7 @@ const DolarCard = () => {
           </div>
           <div className="text-right">
             <p className="text-xs text-gray-500">Venta</p>
-            <p className="text-lg font-bold text-cyan-600">
+            <p className="text-lg font-bold text-blue-600">
               {formatCurrency(dolarData?.blue?.venta || 0)}
             </p>
           </div>

@@ -189,9 +189,9 @@ const DolarWidget = () => {
               {formatCurrency(dolarData?.blue?.compra || 0)}
             </p>
           </div>
-          <div className="bg-cyan-50 rounded-md p-2">
-            <p className="text-xs text-cyan-600 mb-1">Venta</p>
-            <p className="text-sm font-bold text-cyan-900">
+          <div className="bg-blue-50 rounded-md p-2">
+            <p className="text-xs text-blue-600 mb-1">Venta</p>
+            <p className="text-sm font-bold text-blue-900">
               {formatCurrency(dolarData?.blue?.venta || 0)}
             </p>
           </div>
