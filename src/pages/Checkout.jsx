@@ -14,7 +14,7 @@ import {
   Key
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { createSubscription } from '../services/subscriptionService';
+import MercadoPagoCheckout from '../components/MercadoPagoCheckout';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -83,42 +83,13 @@ const Checkout = () => {
     }).format(price);
   };
 
-  const handleQuickRegister = async (e) => {
-    e.preventDefault();
-    try {
-      setRegistering(true);
-      setError(null);
-      
-      await signUp(email, password);
-      // After registration, proceed to payment
-      await handleConfirmPayment();
-    } catch (err) {
-      console.error('Error:', err);
-      setError(err.message || 'Error al registrar. Por favor, intenta nuevamente.');
-      setRegistering(false);
-    }
+  const handlePaymentSuccess = () => {
+    // Redirigir al dashboard después de un pago exitoso
+    navigate('/dashboard');
   };
 
-  const handleConfirmPayment = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const result = await createSubscription(planType);
-      
-      // Redirect to Mercado Pago
-      if (result.init_point) {
-        window.location.href = result.init_point;
-      } else if (result.sandbox_init_point) {
-        window.location.href = result.sandbox_init_point;
-      } else {
-        throw new Error('No se recibió URL de pago');
-      }
-    } catch (err) {
-      console.error('Error:', err);
-      setError(err.message || 'Error al procesar el pago');
-      setLoading(false);
-    }
+  const handlePaymentError = (err) => {
+    setError(err.message || 'Error al procesar el pago');
   };
 
   if (!plan) {
@@ -275,24 +246,16 @@ const Checkout = () => {
                 </div>
               )}
 
-              {/* Payment Button */}
-              <button
-                onClick={handleConfirmPayment}
-                disabled={loading}
-                className="w-full bg-gray-900 text-white py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mb-3"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Procesando...
-                  </>
-                ) : (
-                  <>
-                    <Lock className="w-5 h-5" />
-                    Comenzar Prueba Gratuita
-                  </>
-                )}
-              </button>
+              {/* Mercado Pago Checkout */}
+              <div className="mb-4">
+                <MercadoPagoCheckout
+                  planType={planType}
+                  planPrice={plan.price}
+                  planName={plan.name}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                />
+              </div>
 
               {/* Mercado Pago Logo */}
               <div className="flex items-center justify-center gap-2 mb-4">
