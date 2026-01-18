@@ -47,7 +47,7 @@ const VerifyEmail = () => {
 
             <div className="space-y-3">
               <Link
-                to="/login"
+                to="/"
                 className="block w-full bg-gray-900 text-white py-2.5 rounded-md font-medium hover:bg-gray-800 transition-colors"
               >
                 Ir al inicio de sesión

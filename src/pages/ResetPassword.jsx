@@ -218,7 +218,7 @@ const ResetPassword = () => {
 
         {/* Links */}
         <div className="text-center mt-6">
-          <Link to="/login" className="text-sm text-gray-600 hover:text-gray-800 transition-colors">
+          <Link to="/" className="text-sm text-gray-600 hover:text-gray-800 transition-colors">
             ¿Recordaste tu contraseña? <span className="font-semibold">Inicia sesión</span>
           </Link>
         </div>

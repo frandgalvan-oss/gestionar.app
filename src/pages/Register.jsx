@@ -166,7 +166,7 @@ const Register = () => {
           {/* Login Link */}
           <p className="text-center text-gray-600">
             ¿Ya tienes una cuenta?{' '}
-            <Link to="/login" className="text-gray-700 hover:text-gray-900 font-semibold transition-colors">
+            <Link to="/" className="text-gray-700 hover:text-gray-900 font-semibold transition-colors">
               Inicia sesión
             </Link>
           </p>

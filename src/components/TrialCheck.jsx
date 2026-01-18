@@ -23,7 +23,7 @@ const TrialCheck = ({ children }) => {
     try {
       const { data: profile, error } = await supabase
         .from('profiles')
-        .select('trial_ends_at, is_premium')
+        .select('trial_ends_at, is_premium, is_premium_permanent, subscription_status')
         .eq('id', user.id)
         .single()
 
@@ -34,10 +34,14 @@ const TrialCheck = ({ children }) => {
         const trialEnds = new Date(profile.trial_ends_at)
         const isExpired = now > trialEnds
         const isPremium = profile.is_premium
+        const isPremiumPermanent = profile.is_premium_permanent
+        const hasActiveSubscription = profile.subscription_status === 'active'
 
         setTrialStatus({
           isExpired,
           isPremium,
+          isPremiumPermanent,
+          hasActiveSubscription,
           trialEnds,
           daysLeft: Math.max(0, Math.ceil((trialEnds - now) / (1000 * 60 * 60 * 24)))
         })
@@ -57,8 +61,8 @@ const TrialCheck = ({ children }) => {
     )
   }
 
-  // Si es premium o la prueba no ha expirado, mostrar contenido
-  if (!trialStatus || trialStatus.isPremium || !trialStatus.isExpired) {
+  // Si es premium, tiene premium permanente, tiene suscripción activa, o la prueba no ha expirado, mostrar contenido
+  if (!trialStatus || trialStatus.isPremium || trialStatus.isPremiumPermanent || trialStatus.hasActiveSubscription || !trialStatus.isExpired) {
     return <>{children}</>
   }
 
