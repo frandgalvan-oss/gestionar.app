@@ -1,0 +1,24 @@
+# 🔐 Configuración de Mercado Pago
+# Copia estas líneas en tu archivo .env
+
+# ⚠️ IMPORTANTE: Estas son credenciales de PRODUCCIÓN
+# Asegúrate de mantener este archivo seguro y NO subirlo a GitHub
+
+VITE_MERCADOPAGO_PUBLIC_KEY=APP_USR-2ba12f7b-dfb4-4d52-8f19-662b7be99c57
+
+# Las siguientes credenciales son para uso en backend (NO las uses en el cliente)
+# MERCADOPAGO_ACCESS_TOKEN=APP_USR-7852065796013084-011818-390c9a7d5860783294957b3791fad73b-245332039
+# MERCADOPAGO_CLIENT_ID=7852065796013084
+# MERCADOPAGO_CLIENT_SECRET=[tu_client_secret]
+
+# ⚠️ RECUERDA:
+# - Solo la PUBLIC_KEY debe estar en el cliente (con prefijo VITE_)
+# - El ACCESS_TOKEN debe usarse SOLO en el backend
+# - NUNCA expongas el ACCESS_TOKEN en el código del cliente
+# - Para producción, considera usar variables de entorno del servidor
+
+# 📝 Pasos siguientes:
+# 1. Copia VITE_MERCADOPAGO_PUBLIC_KEY en tu archivo .env
+# 2. Reinicia el servidor: npm run dev
+# 3. Ve a /checkout para probar la integración
+# 4. Configura webhooks en Mercado Pago para recibir notificaciones de pago

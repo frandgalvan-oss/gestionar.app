@@ -4,14 +4,69 @@ Este documento te guiará paso a paso para configurar todas las funcionalidades 
 
 ---
 
-## 🔐 1. Configuración de Supabase - Recuperación de Contraseña
+## 🔐 1. Configuración de Supabase - Email Templates
 
-### Paso 1: Configurar Email Templates
+### Paso 1: Configurar Email de Confirmación (Sign Up)
 
 1. Ve a tu proyecto en [Supabase Dashboard](https://app.supabase.com)
 2. Navega a **Authentication** → **Email Templates**
-3. Selecciona **Reset Password** (Recuperar Contraseña)
+3. Selecciona **Confirm signup** (Confirmar registro)
 4. Personaliza el template con el siguiente contenido:
+
+```html
+<h2>¡Bienvenido a Sistema de Gestión! 🎉</h2>
+
+<p>Hola,</p>
+
+<p>¡Gracias por registrarte en nuestro Sistema de Gestión Empresarial con Inteligencia Artificial!</p>
+
+<p>Para activar tu cuenta y comenzar tu <strong>prueba gratuita de 21 días</strong>, confirma tu correo electrónico haciendo clic en el siguiente botón:</p>
+
+<p style="text-align: center; margin: 30px 0;">
+  <a href="{{ .ConfirmationURL }}" style="background-color: #111827; color: white; padding: 12px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+    Confirmar mi cuenta
+  </a>
+</p>
+
+<p>O copia y pega este enlace en tu navegador:</p>
+<p style="word-break: break-all; color: #6B7280; font-size: 14px;">{{ .ConfirmationURL }}</p>
+
+<div style="background-color: #EFF6FF; border-left: 4px solid #3B82F6; padding: 16px; margin: 24px 0; border-radius: 4px;">
+  <p style="margin: 0; color: #1E40AF; font-weight: bold;">🎁 Tu prueba gratuita incluye:</p>
+  <ul style="color: #1E40AF; margin: 8px 0;">
+    <li>Acceso completo a todas las funcionalidades</li>
+    <li>Chat con IA para análisis financiero</li>
+    <li>Gestión de inventario y movimientos</li>
+    <li>Proyecciones automáticas con IA</li>
+    <li>Cálculo de impuestos (PyME)</li>
+    <li>Simulador de créditos (PyME)</li>
+  </ul>
+</div>
+
+<p style="color: #6B7280; font-size: 14px; margin-top: 24px;">
+  <strong>💡 Consejo:</strong> Una vez confirmada tu cuenta, completa los datos de tu negocio en "Mi Negocio" para personalizar tu experiencia.
+</p>
+
+<p style="margin-top: 32px;">Si no creaste esta cuenta, puedes ignorar este correo de forma segura.</p>
+
+<p style="margin-top: 24px;">
+  Saludos,<br>
+  <strong>El equipo de Sistema de Gestión</strong>
+</p>
+
+<hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
+
+<p style="color: #9CA3AF; font-size: 12px; text-align: center;">
+  Este enlace expirará en 24 horas por seguridad.
+</p>
+```
+
+5. Guarda los cambios
+
+### Paso 2: Configurar Email de Recuperación de Contraseña
+
+1. En **Email Templates**, selecciona **Reset Password** (Recuperar Contraseña)
+2. Personaliza el template con el siguiente contenido:
 
 ```html
 <h2>Recupera tu contraseña</h2>
@@ -24,13 +79,17 @@ Este documento te guiará paso a paso para configurar todas las funcionalidades 
 <p>Saludos,<br>El equipo de Sistema de Gestión</p>
 ```
 
-5. En **Redirect URLs**, agrega:
+3. Guarda los cambios
+
+### Paso 3: Configurar Redirect URLs
+
+1. En **Authentication** → **URL Configuration**
+2. Agrega las siguientes URLs en **Redirect URLs**:
    - `http://localhost:5175/reset-password` (para desarrollo)
    - `https://tudominio.com/reset-password` (para producción)
+3. Guarda los cambios
 
-6. Guarda los cambios
-
-### Paso 2: Ejecutar Migraciones SQL
+### Paso 4: Ejecutar Migraciones SQL
 
 Ejecuta los siguientes archivos SQL en **SQL Editor** de Supabase:
 
@@ -74,16 +133,23 @@ Ejecuta los siguientes archivos SQL en **SQL Editor** de Supabase:
 ### Paso 3: Configurar Variables de Entorno
 
 1. Abre tu archivo `.env` en la raíz del proyecto
-2. Agrega la siguiente línea:
+2. Agrega la siguiente línea con tu Public Key de producción:
 
 ```env
-VITE_MERCADOPAGO_PUBLIC_KEY=TEST-tu-public-key-aqui
+VITE_MERCADOPAGO_PUBLIC_KEY=APP_USR-2ba12f7b-dfb4-4d52-8f19-662b7be99c57
 ```
 
-**⚠️ Importante:**
-- Para desarrollo, usa las credenciales de **TEST**
-- Para producción, usa las credenciales de **APP_USR**
-- **NUNCA** compartas tu Access Token en el código del cliente
+3. **Reinicia el servidor de desarrollo:**
+```bash
+npm run dev
+```
+
+**⚠️ IMPORTANTE - Seguridad:**
+- ✅ La **Public Key** (`APP_USR-...`) es segura para usar en el cliente
+- ❌ El **Access Token** NUNCA debe estar en el código del cliente
+- ❌ El **Client Secret** NUNCA debe estar en el código del cliente
+- 🔒 Access Token y Client Secret solo deben usarse en el backend
+- 📝 Revisa el archivo `CREDENCIALES_MERCADOPAGO.txt` para más detalles
 
 ### Paso 4: Configurar Webhooks (Opcional pero Recomendado)
 
