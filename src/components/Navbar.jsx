@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, LogIn } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Logo from './common/Logo'
 
 const Navbar = () => {
@@ -67,17 +67,11 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Auth Buttons - Separados con más espacio */}
-          <div className="hidden lg:flex items-center gap-6 z-10 ml-8 pl-8 border-l border-gray-200">
-            <Link
-              to="/login"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors px-4 py-2 rounded-md hover:bg-gray-100"
-            >
-              Iniciar Sesión
-            </Link>
+          {/* Auth Button */}
+          <div className="hidden lg:flex items-center z-10">
             <Link
               to="/register"
-              className="text-sm font-medium bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors"
+              className="text-sm font-medium bg-gray-900 text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors"
             >
               Comenzar Ahora
             </Link>
@@ -126,18 +120,11 @@ const Navbar = () => {
                   </a>
                 )
               ))}
-              <div className="mt-4 flex flex-col gap-2 px-4">
-                <Link
-                  to="/login"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-sm font-medium text-center text-gray-700 hover:text-gray-900 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
-                >
-                  Iniciar Sesión
-                </Link>
+              <div className="mt-4 px-4">
                 <Link
                   to="/register"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-sm font-medium text-center bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors"
+                  className="text-sm font-medium text-center bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors block"
                 >
                   Comenzar Ahora
                 </Link>

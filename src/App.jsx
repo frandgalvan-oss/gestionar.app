@@ -4,7 +4,6 @@ import { AuthProvider } from './context/AuthContext'
 import { DataProvider } from './context/DataContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Landing from './pages/Landing'
-import Login from './pages/Login'
 import Register from './pages/Register'
 import VerifyEmail from './pages/VerifyEmail'
 import ForgotPassword from './pages/ForgotPassword'
@@ -26,7 +25,6 @@ function App() {
         <DataProvider>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
