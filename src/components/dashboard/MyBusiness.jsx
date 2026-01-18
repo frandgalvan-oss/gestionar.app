@@ -276,21 +276,18 @@ const MyBusiness = () => {
                 const Icon = selectedType.icon
                 
                 return (
-                  <div className={`relative p-6 rounded-2xl border-2 border-gray-900 shadow-lg bg-gradient-to-br ${selectedType.gradient}`}>
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-5">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16" />
-                      <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12" />
-                    </div>
+                  <div className="relative p-6 rounded-xl border-2 border-gray-900 bg-gray-900 shadow-xl overflow-hidden">
+                    {/* Gradient Accent */}
+                    <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${selectedType.gradient} opacity-10 blur-3xl`} />
                     
                     {/* Check Badge */}
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                    <div className="absolute top-4 right-4 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg">
                       <CheckCircle className="w-5 h-5 text-gray-900" />
                     </div>
                     
                     <div className="relative flex items-center gap-4">
-                      {/* Icon */}
-                      <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/20 flex-shrink-0">
+                      {/* Icon with gradient */}
+                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center bg-gradient-to-br ${selectedType.gradient} shadow-lg flex-shrink-0`}>
                         <Icon className="w-7 h-7 text-white" />
                       </div>
                       
@@ -298,7 +295,7 @@ const MyBusiness = () => {
                         <h3 className="text-xl font-bold text-white mb-1">
                           {selectedType.title}
                         </h3>
-                        <p className="text-sm text-white/90">
+                        <p className="text-sm text-gray-300">
                           {selectedType.description}
                         </p>
                       </div>
@@ -311,7 +308,7 @@ const MyBusiness = () => {
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, businessType: '' })}
-                className="text-sm text-gray-600 hover:text-gray-900 font-medium underline"
+                className="text-sm text-gray-600 hover:text-gray-900 font-medium underline transition-colors"
               >
                 Cambiar tipo de negocio
               </button>
