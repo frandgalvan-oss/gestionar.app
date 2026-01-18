@@ -65,7 +65,7 @@ const MyBusiness = () => {
       title: 'Emprendedor',
       description: 'Ideal para freelancers y pequeños negocios',
       icon: Zap,
-      gradient: 'from-gray-700 to-gray-900',
+      gradient: 'from-gray-600 to-gray-700',
       lightBg: 'from-gray-50 to-gray-100',
       borderColor: 'border-gray-300',
       textColor: 'text-gray-900',
@@ -80,10 +80,10 @@ const MyBusiness = () => {
       title: 'PyME',
       description: 'Para pequeñas y medianas empresas',
       icon: Building2,
-      gradient: 'from-blue-600 to-blue-800',
-      lightBg: 'from-blue-50 to-blue-100',
-      borderColor: 'border-blue-300',
-      textColor: 'text-blue-900',
+      gradient: 'from-slate-600 to-slate-700',
+      lightBg: 'from-gray-50 to-gray-100',
+      borderColor: 'border-gray-300',
+      textColor: 'text-gray-900',
       features: [
         { icon: Shield, text: 'Gestión completa' },
         { icon: Calculator, text: 'Cálculo de impuestos' },
@@ -233,16 +233,16 @@ const MyBusiness = () => {
                   type="button"
                   onClick={() => setFormData({ ...formData, businessType: type.value })}
                   className={`
-                    relative p-8 rounded-2xl border-2 transition-all duration-500 text-left overflow-hidden group
+                    relative p-8 rounded-2xl border-2 transition-all duration-300 text-left overflow-hidden group
                     ${isSelected 
-                      ? `border-transparent shadow-2xl bg-gradient-to-br ${type.gradient}` 
-                      : 'border-gray-200 bg-white hover:border-gray-400 hover:shadow-md'
+                      ? `border-gray-900 shadow-lg bg-gradient-to-br ${type.gradient}` 
+                      : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
                     }
                   `}
                 >
-                  {/* Background Pattern */}
+                  {/* Background Pattern - Más sutil */}
                   {isSelected && (
-                    <div className="absolute inset-0 opacity-10">
+                    <div className="absolute inset-0 opacity-5">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16" />
                       <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12" />
                     </div>
@@ -250,8 +250,8 @@ const MyBusiness = () => {
                   
                   {/* Check Badge */}
                   {isSelected && (
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg">
-                      <CheckCircle className="w-5 h-5 text-green-600" />
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                      <CheckCircle className="w-5 h-5 text-gray-900" />
                     </div>
                   )}
                   

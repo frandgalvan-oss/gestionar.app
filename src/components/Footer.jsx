@@ -56,7 +56,7 @@ const Footer = () => {
                 Instrucciones de Uso
               </Link>
               <Link to="/admin/suscripciones" className="block text-gray-400 text-sm hover:text-white transition-colors">
-                Panel Admin
+                Suscripciones
               </Link>
             </div>
           </div>
