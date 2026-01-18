@@ -78,8 +78,7 @@ MERCADOPAGO_ACCESS_TOKEN=APP_USR-7852065796013084-011818-390c9a7d5860783294957b3
 ## 🎯 Flujo de pago
 
 1. **Usuario va a `/premium`**
-   - Ve los planes disponibles (Mensual/Anual)
-   - Selecciona un plan
+   - Ve el plan Premium ($14,000/mes)
    - Click en "Suscribirme ahora"
 
 2. **Sistema crea preferencia**
@@ -162,21 +161,14 @@ Necesitarás crear otra Edge Function para manejar webhooks.
 
 ## 🎨 Personalización
 
-### Cambiar precios
+### Cambiar precio
 
 En `src/pages/Premium.jsx`:
 
 ```javascript
-const plans = {
-  monthly: {
-    price: 12000, // Cambiar aquí
-    // ...
-  },
-  annual: {
-    price: 120000, // Cambiar aquí
-    savings: 24000, // Actualizar ahorro
-    // ...
-  }
+const plan = {
+  price: 14000, // Precio actual: $14,000/mes
+  // ...
 };
 ```
 
