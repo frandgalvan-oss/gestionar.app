@@ -104,6 +104,48 @@ Ejecuta los siguientes archivos SQL en **SQL Editor** de Supabase:
 -- Ejecutar: database/migrations/create_admin_update_functions.sql
 ```
 
+### Paso 5: Desplegar Edge Function para Mercado Pago
+
+Para procesar pagos de forma segura, necesitas desplegar una Edge Function en Supabase:
+
+#### Opción A: Usando Supabase CLI (Recomendado)
+
+1. **Instalar Supabase CLI:**
+```bash
+npm install -g supabase
+```
+
+2. **Iniciar sesión:**
+```bash
+supabase login
+```
+
+3. **Vincular tu proyecto:**
+```bash
+supabase link --project-ref tu-project-ref
+```
+
+4. **Configurar variables de entorno:**
+En el dashboard de Supabase, ve a **Edge Functions** → **Settings** y agrega:
+- `MERCADOPAGO_ACCESS_TOKEN`: Tu Access Token de Mercado Pago
+
+5. **Desplegar la función:**
+```bash
+supabase functions deploy create-preference
+```
+
+#### Opción B: Sin CLI (Manual)
+
+Si no puedes usar la CLI, puedes crear la función manualmente:
+
+1. Ve a **Edge Functions** en tu dashboard de Supabase
+2. Crea una nueva función llamada `create-preference`
+3. Copia el contenido de `supabase/functions/create-preference/index.ts`
+4. Configura las variables de entorno en Settings
+5. Despliega la función
+
+**⚠️ IMPORTANTE:** La Edge Function es necesaria para crear preferencias de pago de forma segura. Sin ella, los pagos no funcionarán.
+
 ---
 
 ## 💳 2. Configuración de Mercado Pago
