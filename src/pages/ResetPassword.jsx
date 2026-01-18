@@ -50,7 +50,7 @@ const ResetPassword = () => {
       if (response.ok) {
         setSuccess(true)
         setTimeout(() => {
-          navigate('/login')
+          navigate('/')
         }, 3000)
       } else {
         setError(data.error || 'Error al restablecer la contraseña')

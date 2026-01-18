@@ -65,7 +65,7 @@ Puedes preguntarme cosas como:
 
   const handleSignOut = async () => {
     await signOut()
-    navigate('/login')
+    navigate('/')
   }
 
   const handleSubmit = async (e, customMessage = null) => {

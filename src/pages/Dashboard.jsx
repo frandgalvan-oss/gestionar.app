@@ -55,7 +55,7 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     await signOut()
-    navigate('/login')
+    navigate('/')
   }
 
   // Determinar si es emprendedor

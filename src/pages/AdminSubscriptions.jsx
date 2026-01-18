@@ -39,8 +39,8 @@ const AdminSubscriptions = () => {
       console.log('Usuario completo:', user)
       
       if (!user) {
-        console.log('No hay usuario, redirigiendo a login')
-        navigate('/login')
+        console.log('No hay usuario, redirigiendo a landing')
+        navigate('/')
         return
       }
 

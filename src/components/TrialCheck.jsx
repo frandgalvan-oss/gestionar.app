@@ -133,7 +133,7 @@ const TrialCheck = ({ children }) => {
             <button
               onClick={() => {
                 supabase.auth.signOut()
-                navigate('/login')
+                navigate('/')
               }}
               className="w-full px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
             >

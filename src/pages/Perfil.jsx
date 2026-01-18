@@ -81,7 +81,7 @@ const Perfil = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/login');
+    navigate('/');
   };
 
   const formatDate = (dateString) => {
