@@ -1,0 +1,26 @@
+{
+  "name": "mvp-backend",
+  "version": "1.0.0",
+  "description": "Backend for IA Solutions with Mercado Pago subscriptions",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mercadopago": "^2.0.11",
+    "nodemailer": "^6.9.7",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.34.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
