@@ -70,21 +70,16 @@ const Features = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-gray-200 hover:border-gray-900 hover:shadow-2xl transition-all duration-300 animate-fade-in"
+              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-gray-200 hover:border-gray-900 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-gray-900 flex items-center justify-center mb-5 transform group-hover:scale-110 transition-all duration-300">
-                <feature.icon className="w-7 h-7 text-white" />
-              </div>
-
               {/* Content */}
-              <h3 className="text-xl font-bold mb-3 flex items-center gap-2 flex-wrap">
-                <span className="bg-gradient-to-r from-gray-900 to-cyan-600 bg-clip-text text-transparent">
+              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 flex-wrap">
+                <span className="text-gray-900">
                   {feature.title}
                 </span>
                 {feature.comingSoon && (
-                  <span className="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+                  <span className="text-xs font-medium px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
                     Próximamente
                   </span>
                 )}

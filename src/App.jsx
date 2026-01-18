@@ -16,6 +16,7 @@ import Checkout from './pages/Checkout'
 import Perfil from './pages/Perfil'
 import TermsAndConditions from './pages/TermsAndConditions'
 import UserGuide from './pages/UserGuide'
+import AdminSubscriptions from './pages/AdminSubscriptions'
 import TrialCheck from './components/TrialCheck'
 
 function App() {
@@ -54,6 +55,14 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/terminos" element={<TermsAndConditions />} />
             <Route path="/instrucciones" element={<UserGuide />} />
+            <Route
+              path="/admin/suscripciones"
+              element={
+                <ProtectedRoute>
+                  <AdminSubscriptions />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/perfil"
               element={

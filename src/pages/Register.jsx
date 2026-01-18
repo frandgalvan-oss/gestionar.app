@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Mail, Lock, User, AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
-import Logo from '../components/common/Logo'
 
 const Register = () => {
   const [fullName, setFullName] = useState('')
@@ -50,11 +49,8 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
-        {/* Logo */}
+        {/* Header */}
         <div className="text-center mb-8">
-          <Link to="/" className="inline-block mb-6">
-            <Logo size="md" />
-          </Link>
           <h1 className="text-2xl font-semibold text-gray-900 mb-2">Crea tu cuenta</h1>
           <p className="text-sm text-gray-600">Comienza a gestionar tu empresa hoy</p>
         </div>
