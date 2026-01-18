@@ -210,7 +210,7 @@ const MyBusiness = () => {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Business Type Selection - Destacado */}
+        {/* Business Type Selection - Mejorado UX */}
         <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200 p-6">
           <div className="mb-6">
             <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
@@ -222,74 +222,101 @@ const MyBusiness = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {businessTypes.map((type) => {
-              const Icon = type.icon
-              const isSelected = formData.businessType === type.value
-              
-              return (
-                <button
-                  key={type.value}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, businessType: type.value })}
-                  className={`
-                    relative p-8 rounded-2xl border-2 transition-all duration-300 text-left overflow-hidden group
-                    ${isSelected 
-                      ? `border-gray-900 shadow-lg bg-gradient-to-br ${type.gradient}` 
-                      : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
-                    }
-                  `}
-                >
-                  {/* Background Pattern - Más sutil */}
-                  {isSelected && (
+          {/* Si NO hay tipo seleccionado, mostrar las dos opciones */}
+          {!formData.businessType && (
+            <div className="grid md:grid-cols-2 gap-6">
+              {businessTypes.map((type) => {
+                const Icon = type.icon
+                
+                return (
+                  <button
+                    key={type.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, businessType: type.value })}
+                    className="relative p-8 rounded-2xl border-2 border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm transition-all duration-300 text-left overflow-hidden group"
+                  >
+                    {/* Icon with gradient background */}
+                    <div className={`relative w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br ${type.gradient}`}>
+                      <Icon className="w-7 h-7 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">
+                      {type.title}
+                    </h3>
+                    
+                    <p className="text-sm mb-6 text-gray-600">
+                      {type.description}
+                    </p>
+                    
+                    {/* Features with icons */}
+                    <ul className="space-y-3">
+                      {type.features.map((feature, idx) => {
+                        const FeatureIcon = feature.icon
+                        return (
+                          <li key={idx} className="text-sm flex items-center gap-3 text-gray-700">
+                            <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100">
+                              <FeatureIcon className="w-3.5 h-3.5 text-gray-600" />
+                            </div>
+                            <span className="font-medium">{feature.text}</span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </button>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Si YA hay tipo seleccionado, mostrar solo el seleccionado con opción de cambiar */}
+          {formData.businessType && (
+            <div className="space-y-4">
+              {(() => {
+                const selectedType = businessTypes.find(t => t.value === formData.businessType)
+                const Icon = selectedType.icon
+                
+                return (
+                  <div className={`relative p-6 rounded-2xl border-2 border-gray-900 shadow-lg bg-gradient-to-br ${selectedType.gradient}`}>
+                    {/* Background Pattern */}
                     <div className="absolute inset-0 opacity-5">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -mr-16 -mt-16" />
                       <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12" />
                     </div>
-                  )}
-                  
-                  {/* Check Badge */}
-                  {isSelected && (
+                    
+                    {/* Check Badge */}
                     <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
                       <CheckCircle className="w-5 h-5 text-gray-900" />
                     </div>
-                  )}
-                  
-                  {/* Icon with gradient background */}
-                  <div className={`relative w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${
-                    isSelected ? 'bg-white/20' : 'bg-gradient-to-br ' + type.gradient
-                  }`}>
-                    <Icon className={`w-7 h-7 ${isSelected ? 'text-white' : 'text-white'}`} />
+                    
+                    <div className="relative flex items-center gap-4">
+                      {/* Icon */}
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-white/20 flex-shrink-0">
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-white mb-1">
+                          {selectedType.title}
+                        </h3>
+                        <p className="text-sm text-white/90">
+                          {selectedType.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <h3 className={`text-xl font-bold mb-2 ${isSelected ? 'text-white' : 'text-gray-900'}`}>
-                    {type.title}
-                  </h3>
-                  
-                  <p className={`text-sm mb-6 ${isSelected ? 'text-white/90' : 'text-gray-600'}`}>
-                    {type.description}
-                  </p>
-                  
-                  {/* Features with icons */}
-                  <ul className="space-y-3">
-                    {type.features.map((feature, idx) => {
-                      const FeatureIcon = feature.icon
-                      return (
-                        <li key={idx} className={`text-sm flex items-center gap-3 ${isSelected ? 'text-white/95' : 'text-gray-700'}`}>
-                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                            isSelected ? 'bg-white/20' : 'bg-gray-100'
-                          }`}>
-                            <FeatureIcon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-gray-600'}`} />
-                          </div>
-                          <span className="font-medium">{feature.text}</span>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </button>
-              )
-            })}
-          </div>
+                )
+              })()}
+              
+              {/* Botón para cambiar tipo */}
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, businessType: '' })}
+                className="text-sm text-gray-600 hover:text-gray-900 font-medium underline"
+              >
+                Cambiar tipo de negocio
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Datos Básicos */}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Mail, Sparkles, AlertCircle, CheckCircle, Loader2, ArrowLeft } from 'lucide-react'
+import { supabase } from '../lib/supabase'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
@@ -21,21 +22,15 @@ const ForgotPassword = () => {
     setLoading(true)
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/request-password-reset`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
       })
 
-      const data = await response.json()
-
-      if (response.ok) {
+      if (resetError) {
+        setError(resetError.message)
+      } else {
         setSuccess(true)
         setEmail('')
-      } else {
-        setError(data.error || 'Error al procesar la solicitud')
       }
     } catch (error) {
       setError('Error de conexión. Por favor intenta nuevamente.')

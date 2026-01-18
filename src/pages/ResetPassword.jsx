@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useNavigate, useSearchParams, Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { Lock, Sparkles, AlertCircle, CheckCircle, Loader2, Eye, EyeOff } from 'lucide-react'
+import { supabase } from '../lib/supabase'
 
 const ResetPassword = () => {
-  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -12,17 +12,29 @@ const ResetPassword = () => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
-  const token = searchParams.get('token')
+  const [isValidSession, setIsValidSession] = useState(false)
+  const [checkingSession, setCheckingSession] = useState(true)
+
+  useEffect(() => {
+    // Verificar si hay una sesión de recuperación válida
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session) {
+        setIsValidSession(true)
+      } else {
+        setIsValidSession(false)
+      }
+      setCheckingSession(false)
+    }
+    
+    checkSession()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setSuccess(false)
-
-    if (!token) {
-      setError('Token de recuperación no encontrado')
-      return
-    }
 
     if (newPassword !== confirmPassword) {
       setError('Las contraseñas no coinciden')
@@ -37,23 +49,17 @@ const ResetPassword = () => {
     setLoading(true)
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/reset-password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token, newPassword }),
+      const { error: updateError } = await supabase.auth.updateUser({
+        password: newPassword
       })
 
-      const data = await response.json()
-
-      if (response.ok) {
+      if (updateError) {
+        setError(updateError.message)
+      } else {
         setSuccess(true)
         setTimeout(() => {
           navigate('/')
         }, 3000)
-      } else {
-        setError(data.error || 'Error al restablecer la contraseña')
       }
     } catch (error) {
       setError('Error de conexión. Por favor intenta nuevamente.')
@@ -63,14 +69,22 @@ const ResetPassword = () => {
     }
   }
 
-  if (!token) {
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-900" />
+      </div>
+    )
+  }
+
+  if (!isValidSession) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
           <div className="bg-white border border-gray-200 rounded-lg p-8 text-center">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
             <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-              Token no válido
+              Enlace no válido
             </h1>
             <p className="text-gray-600 mb-6">
               El enlace de recuperación no es válido o ha expirado.
