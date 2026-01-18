@@ -292,15 +292,11 @@ const Dashboard = () => {
           
           <div className="flex items-center gap-2 sm:gap-3">
             {companyData?.businessType && (
-<<<<<<< HEAD
-              <div className="hidden lg:flex items-center gap-2 text-xs font-medium text-gray-500">
-=======
               <div className={`hidden lg:flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl shadow-md ${
                 companyData.businessType === 'emprendedor'
                   ? 'bg-gradient-to-r from-gray-700 to-gray-900 text-white'
                   : 'bg-gradient-to-r from-blue-600 to-blue-800 text-white'
               }`}>
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
                 {companyData.businessType === 'emprendedor' ? (
                   <>
                     <Sparkles className="w-4 h-4" />
@@ -316,11 +312,7 @@ const Dashboard = () => {
             )}
             <button
               onClick={handleSignOut}
-<<<<<<< HEAD
-              className="hidden lg:flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
-=======
               className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors"
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
             >
               <LogOut className="w-4 h-4" />
               <span>Salir</span>

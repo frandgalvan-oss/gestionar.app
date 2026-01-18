@@ -55,12 +55,6 @@ const Footer = () => {
               <Link to="/instrucciones" className="block text-gray-400 text-sm hover:text-white transition-colors">
                 Instrucciones de Uso
               </Link>
-<<<<<<< HEAD
-              <Link to="/admin/suscripciones" className="block text-gray-400 text-sm hover:text-white transition-colors">
-                Suscripciones
-              </Link>
-=======
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
             </div>
           </div>
         </div>

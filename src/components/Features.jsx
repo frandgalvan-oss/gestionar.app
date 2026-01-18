@@ -70,18 +70,6 @@ const Features = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-<<<<<<< HEAD
-              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-gray-200 hover:border-gray-900 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Content */}
-              <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 flex-wrap">
-                <span className="text-gray-900">
-                  {feature.title}
-                </span>
-                {feature.comingSoon && (
-                  <span className="text-xs font-medium px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
-=======
               className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-gray-200 hover:border-gray-900 hover:shadow-2xl transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -97,7 +85,6 @@ const Features = () => {
                 </span>
                 {feature.comingSoon && (
                   <span className="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
                     Próximamente
                   </span>
                 )}
