@@ -465,11 +465,7 @@ function extractDescription(text, invoiceNumber) {
 /**
  * Categoriza automáticamente la factura basándose en palabras clave
  */
-<<<<<<< HEAD
 export function categorizeInvoice(text, type) {
-=======
-function categorizeInvoice(text, type) {
->>>>>>> 6898796605b944da229649fbc6b79fa3ea17812f
   const textLower = text.toLowerCase()
   
   if (type === 'income') {
