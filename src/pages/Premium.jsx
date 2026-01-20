@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Check, Loader2, Shield, ArrowLeft, Lock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -71,7 +71,17 @@ const Premium = () => {
       }
     } catch (err) {
       console.error('Error:', err);
-      setError(err.message || 'Error al procesar el pago. Por favor, intenta nuevamente.');
+      let errorMessage = 'Error al procesar el pago. Por favor, intenta nuevamente.';
+      
+      if (err.message?.includes('Failed to send a request to the Edge Function') || 
+          err.message?.includes('CORS') || 
+          err.message?.includes('fetch')) {
+        errorMessage = 'El servicio de pagos no está disponible en este momento. Por favor, contacta al administrador.';
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
       setProcessing(false);
     }
   };
