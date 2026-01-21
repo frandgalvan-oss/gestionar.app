@@ -270,7 +270,6 @@ const Dashboard = () => {
               to="/premium"
               className="w-full px-4 py-2.5 text-sm font-semibold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-              <Crown className="w-4 h-4" />
               <span>Ver Planes</span>
             </Link>
           </div>

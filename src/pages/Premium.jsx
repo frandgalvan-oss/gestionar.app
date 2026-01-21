@@ -50,28 +50,61 @@ const Premium = () => {
       setProcessing(true);
       setError(null);
 
-      const { data, error: functionError } = await supabase.functions.invoke('create-preference', {
-        body: {
+      console.log('📤 Enviando solicitud a Edge Function:', {
+        planType: plan.id,
+        planPrice: plan.price,
+        planName: plan.name
+      });
+
+      // Usar fetch directo para capturar el error completo
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-preference`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`,
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({
           planType: plan.id,
           planPrice: plan.price,
           planName: plan.name
-        }
+        })
       });
 
-      if (functionError) {
-        throw functionError;
+      const responseText = await response.text();
+      console.log('📥 Response status:', response.status);
+      console.log('📥 Response text:', responseText);
+
+      if (!response.ok) {
+        let errorData;
+        try {
+          errorData = JSON.parse(responseText);
+        } catch {
+          errorData = { error: responseText };
+        }
+        console.error('❌ Edge Function Error:', errorData);
+        throw new Error(errorData.error || 'Error al procesar el pago');
       }
 
+      const data = JSON.parse(responseText);
+      console.log('📥 Respuesta exitosa:', data);
+
       if (data?.initPoint) {
+        console.log('✅ Redirigiendo a Mercado Pago:', data.initPoint);
         window.location.href = data.initPoint;
       } else if (data?.sandboxInitPoint) {
+        console.log('✅ Redirigiendo a Mercado Pago Sandbox:', data.sandboxInitPoint);
         window.location.href = data.sandboxInitPoint;
       } else {
+        console.error('❌ No se recibió URL de pago. Data:', data);
         throw new Error('No se recibió URL de pago');
       }
     } catch (err) {
-      console.error('Error:', err);
-      let errorMessage = 'Error al procesar el pago. Por favor, intenta nuevamente.';
+      console.error('❌ Error completo:', err);
+      console.error('Error message:', err.message);
+      let errorMessage = err.message || 'Error al procesar el pago. Por favor, intenta nuevamente.';
       
       if (err.message?.includes('Failed to send a request to the Edge Function') || 
           err.message?.includes('CORS') || 
