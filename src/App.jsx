@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout'
 import PaymentSuccess from './pages/PaymentSuccess'
 import PaymentFailure from './pages/PaymentFailure'
 import PaymentPending from './pages/PaymentPending'
+import Subscription from './pages/Subscription'
 import Perfil from './pages/Perfil'
 import TermsAndConditions from './pages/TermsAndConditions'
 import UserGuide from './pages/UserGuide'
@@ -57,6 +58,14 @@ function App() {
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/failure" element={<PaymentFailure />} />
             <Route path="/payment/pending" element={<PaymentPending />} />
+            <Route
+              path="/subscription"
+              element={
+                <ProtectedRoute>
+                  <Subscription />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/terminos" element={<TermsAndConditions />} />
             <Route path="/instrucciones" element={<UserGuide />} />
             <Route

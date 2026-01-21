@@ -14,7 +14,8 @@ const PaymentSuccess = () => {
       try {
         const paymentId = searchParams.get('payment_id');
         const preferenceId = searchParams.get('preference_id');
-        const externalReference = searchParams.get('external_reference');
+        const status = searchParams.get('status');
+        const paymentType = searchParams.get('payment_type');
 
         const { data: { user } } = await supabase.auth.getUser();
         
@@ -22,36 +23,41 @@ const PaymentSuccess = () => {
           throw new Error('Usuario no autenticado');
         }
 
-        // Actualizar la preferencia de pago
-        if (preferenceId) {
-          await supabase
-            .from('payment_preferences')
-            .update({
-              payment_id: paymentId,
-              payment_status: 'approved',
-              status: 'completed'
-            })
-            .eq('id', preferenceId);
+        if (status !== 'approved') {
+          throw new Error('El pago no fue aprobado');
         }
 
-        // Activar suscripción
-        const subscriptionEndDate = new Date();
-        subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + 1);
+        // Obtener datos de la preferencia de pago
+        const { data: preference } = await supabase
+          .from('payment_preferences')
+          .select('*')
+          .eq('preference_id', preferenceId)
+          .single();
 
-        const { error: updateError } = await supabase
-          .from('profiles')
-          .update({
-            subscription_status: 'active',
-            subscription_end_date: subscriptionEndDate.toISOString(),
-            is_premium: true,
-            trial_ends_at: null
-          })
-          .eq('id', user.id);
-
-        if (updateError) {
-          throw updateError;
+        if (!preference) {
+          throw new Error('No se encontró la preferencia de pago');
         }
 
+        // Procesar el pago exitoso usando la función de Supabase
+        const { data: result, error: processError } = await supabase.rpc('process_successful_payment', {
+          p_user_id: user.id,
+          p_payment_id: paymentId,
+          p_preference_id: preferenceId,
+          p_amount: preference.amount,
+          p_payment_method: paymentType || 'Mercado Pago',
+          p_mercadopago_data: {
+            payment_id: paymentId,
+            status: status,
+            payment_type: paymentType,
+            processed_at: new Date().toISOString()
+          }
+        });
+
+        if (processError) {
+          throw processError;
+        }
+
+        console.log('Pago procesado exitosamente:', result);
         setProcessing(false);
 
         // Redirigir al dashboard después de 3 segundos
