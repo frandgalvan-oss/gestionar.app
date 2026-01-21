@@ -12,6 +12,7 @@
     "@mercadopago/sdk-react": "^1.0.7",
     "@supabase/supabase-js": "^2.38.4",
     "framer-motion": "^10.16.4",
+    "jspdf": "^4.0.0",
     "lucide-react": "^0.294.0",
     "openai": "^4.104.0",
     "pdf-parse": "^1.1.1",
