@@ -19,7 +19,22 @@ const Login = () => {
     const { error } = await signIn(email, password)
 
     if (error) {
-      setError(error.message)
+      // Traducir errores comunes de Supabase al español
+      let errorMessage = error.message
+      
+      if (error.message.includes('Invalid login credentials')) {
+        errorMessage = 'Usuario o contraseña incorrecta'
+      } else if (error.message.includes('Email not confirmed')) {
+        errorMessage = 'Por favor, confirma tu correo electrónico antes de iniciar sesión'
+      } else if (error.message.includes('User not found')) {
+        errorMessage = 'No existe una cuenta con este correo electrónico'
+      } else if (error.message.includes('Invalid email')) {
+        errorMessage = 'El formato del correo electrónico no es válido'
+      } else if (error.message.includes('Too many requests')) {
+        errorMessage = 'Demasiados intentos. Por favor, espera unos minutos'
+      }
+      
+      setError(errorMessage)
       setLoading(false)
     } else {
       navigate('/dashboard')

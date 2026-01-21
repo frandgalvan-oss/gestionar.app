@@ -258,12 +258,22 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <Link
-            to="/premium"
-            className="w-full px-4 py-2.5 text-sm font-semibold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
-          >
-            <span>Ver mi plan</span>
-          </Link>
+          <div className="space-y-2">
+            <Link
+              to="/subscription"
+              className="w-full px-4 py-2.5 text-sm font-semibold bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Mi Suscripción</span>
+            </Link>
+            <Link
+              to="/premium"
+              className="w-full px-4 py-2.5 text-sm font-semibold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <Crown className="w-4 h-4" />
+              <span>Ver Planes</span>
+            </Link>
+          </div>
         </div>
       </div>
 
