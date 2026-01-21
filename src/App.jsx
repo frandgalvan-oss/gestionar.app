@@ -20,6 +20,7 @@ import Perfil from './pages/Perfil'
 import TermsAndConditions from './pages/TermsAndConditions'
 import UserGuide from './pages/UserGuide'
 import AdminSubscriptions from './pages/AdminSubscriptions'
+import AdminSecurity from './pages/AdminSecurity'
 import TrialCheck from './components/TrialCheck'
 
 function App() {
@@ -73,6 +74,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AdminSubscriptions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/security"
+              element={
+                <ProtectedRoute>
+                  <AdminSecurity />
                 </ProtectedRoute>
               }
             />

@@ -38,8 +38,8 @@ const PaymentSuccess = () => {
           throw new Error('No se encontró la preferencia de pago');
         }
 
-        // Procesar el pago exitoso usando la función de Supabase
-        const { data: result, error: processError } = await supabase.rpc('process_successful_payment', {
+        // Procesar el pago exitoso usando la función segura de Supabase
+        const { data: result, error: processError } = await supabase.rpc('process_successful_payment_secure', {
           p_user_id: user.id,
           p_payment_id: paymentId,
           p_preference_id: preferenceId,
@@ -50,7 +50,8 @@ const PaymentSuccess = () => {
             status: status,
             payment_type: paymentType,
             processed_at: new Date().toISOString()
-          }
+          },
+          p_ip_address: null
         });
 
         if (processError) {
