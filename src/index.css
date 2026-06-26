@@ -2,61 +2,145 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── CSS Variables (estilo Next.js/Vercel) ─── */
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-accents-1: #fafafa;
+  --color-accents-2: #f5f5f5;
+  --color-accents-3: #e5e5e5;
+  --color-accents-4: #d4d4d4;
+  --color-accents-5: #a3a3a3;
+  --color-accents-6: #737373;
+  --color-accents-7: #525252;
+  --color-accents-8: #262626;
+  --color-success: #0070f3;
+  --color-error: #e00;
+  --color-warning: #f5a623;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', Menlo, Monaco, monospace;
+  --border-radius: 8px;
+  --transition: 150ms ease;
+}
+
+/* ─── Base ─── */
 @layer base {
-  :root {
-    @apply bg-white text-gray-900 antialiased;
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
-  
+
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-white text-neutral-950 antialiased;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em;
+    font-weight: 700;
   }
 }
 
+/* ─── Utilities ─── */
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #000 0%, #444 100%);
   }
-  
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-xl border border-gray-200/50;
+
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0070f3 0%, #0761d1 100%);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(229, 229, 229, 0.6);
+  }
+
+  .surface {
+    @apply bg-white border border-neutral-200 rounded-lg;
+  }
+
+  .surface-hover {
+    @apply hover:border-neutral-400 hover:shadow-card-hover transition-all duration-150;
+  }
+
+  /* Dot grid background — estilo Vercel */
+  .bg-grid {
+    background-color: #fff;
+    background-image: radial-gradient(circle, #d4d4d4 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Shimmer text */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      #000 0%,
+      #555 40%,
+      #000 60%,
+      #000 100%
+    );
+    background-size: 200% auto;
+    @apply bg-clip-text text-transparent animate-shimmer;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border border-neutral-200 bg-neutral-50 text-neutral-700;
+  }
+
+  /* Input estilo Next.js */
+  .input-vercel {
+    @apply w-full px-3 py-2 text-sm bg-white border border-neutral-300 rounded-lg text-neutral-900 placeholder-neutral-400 outline-none transition-all duration-150;
+    @apply focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10;
+  }
+
+  /* Button estilos */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-neutral-950 rounded-lg transition-all duration-150;
+    @apply hover:bg-neutral-800 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-neutral-800 bg-white border border-neutral-200 rounded-lg transition-all duration-150;
+    @apply hover:bg-neutral-50 hover:border-neutral-300 active:scale-[0.98] disabled:opacity-50;
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
+  background: #d4d4d4;
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #a3a3a3;
 }
 
-/* Toast animation */
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
+/* ─── Animaciones ─── */
 .animate-slideIn {
   animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }

@@ -8,131 +8,127 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navLinks = [
-    { name: 'Inicio', href: '#home' },
     { name: 'Características', href: '#features' },
     { name: 'Dashboard', href: '#dashboard-preview' },
-    { name: 'Inteligencia', href: '#intelligence' },
-    { name: 'Instrucciones', href: '/instrucciones', isRoute: true },
-    { name: 'Términos', href: '/terminos', isRoute: true },
+    { name: 'Precios', href: '/premium', isRoute: true },
   ]
 
+  const scrollTo = (href) => {
+    const el = document.querySelector(href)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setIsMobileMenuOpen(false)
+  }
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200'
-          : 'bg-white/80 backdrop-blur-md'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16 relative">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      isScrolled ? 'border-b border-neutral-200 bg-white/90 backdrop-blur-md' : 'bg-transparent'
+    }`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-14">
+
           {/* Logo */}
-          <a href="#home" className="group z-10">
+          <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('#home') }}>
             <Logo size="sm" />
           </a>
 
-          {/* Desktop Navigation - Centrado */}
-          <div className="hidden lg:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
-            {navLinks.map((link) => (
+          {/* Desktop nav — centrado */}
+          <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium whitespace-nowrap"
+                  className="text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                   {link.name}
                 </Link>
               ) : (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium whitespace-nowrap"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const element = document.querySelector(link.href)
-                    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                  }}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                   {link.name}
-                </a>
+                </button>
               )
-            ))}
+            )}
           </div>
 
-          {/* Auth Button */}
-          <div className="hidden lg:flex items-center z-10">
+          {/* Acciones */}
+          <div className="hidden md:flex items-center gap-3">
             <Link
               to="/register"
-              className="text-sm font-medium bg-gray-900 text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors"
+              className="text-sm text-neutral-600 hover:text-neutral-950 transition-colors"
             >
-              Comenzar Ahora
+              Iniciar sesión
+            </Link>
+            <Link
+              to="/register"
+              className="btn-primary text-sm px-4 py-2 rounded-lg"
+            >
+              Comenzar gratis
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors z-10"
+            className="md:hidden p-2 rounded-md text-neutral-700 hover:bg-neutral-100 transition-colors"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-900" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-900" />
-            )}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                link.isRoute ? (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors font-medium px-4 py-2 rounded-md"
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setIsMobileMenuOpen(false)
-                      const element = document.querySelector(link.href)
-                      element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }}
-                    className="text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors font-medium px-4 py-2 rounded-md"
-                  >
-                    {link.name}
-                  </a>
-                )
-              ))}
-              <div className="mt-4 px-4">
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-neutral-200 bg-white/95 backdrop-blur-md animate-fade-in">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
+            {navLinks.map((link) =>
+              link.isRoute ? (
                 <Link
-                  to="/register"
+                  key={link.name}
+                  to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-sm font-medium text-center bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors block"
+                  className="text-sm text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50 px-3 py-2 rounded-md transition-colors"
                 >
-                  Comenzar Ahora
+                  {link.name}
                 </Link>
-              </div>
+              ) : (
+                <button
+                  key={link.name}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-sm text-neutral-600 hover:text-neutral-950 hover:bg-neutral-50 px-3 py-2 rounded-md text-left transition-colors"
+                >
+                  {link.name}
+                </button>
+              )
+            )}
+            <div className="pt-3 mt-2 border-t border-neutral-100 flex flex-col gap-2">
+              <Link
+                to="/register"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-secondary text-sm py-2.5 rounded-lg text-center"
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-primary text-sm py-2.5 rounded-lg text-center"
+              >
+                Comenzar gratis
+              </Link>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   )
 }
