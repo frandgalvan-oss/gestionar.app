@@ -1,0 +1,439 @@
+{
+  "meta": {
+    "version": "1.0",
+    "generado": "2026-06-26",
+    "descripcion": "Contexto completo del proyecto gestionar.app para continuar desarrollo con Claude",
+    "repo": "https://github.com/frandgalvan-oss/gestionar.app",
+    "uso": "Pasá este archivo al inicio de cada conversación con Claude para que tenga contexto completo del proyecto"
+  },
+
+  "proyecto": {
+    "nombre": "gestionar.app",
+    "descripcion": "SaaS de gestión empresarial para PyMEs argentinas. Incluye finanzas, inventario, reportes, pagos con MercadoPago y suscripciones.",
+    "target": "PyMEs en Argentina",
+    "moneda_principal": "ARS",
+    "estado": "MVP en producción",
+    "dominio_objetivo": "gestionar.app"
+  },
+
+  "stack": {
+    "frontend": {
+      "framework": "React 18",
+      "bundler": "Vite 5",
+      "estilos": "Tailwind CSS 3 (diseño Next.js/Vercel style)",
+      "fuente": "Geist (Google Fonts)",
+      "router": "react-router-dom v6",
+      "animaciones": "framer-motion",
+      "iconos": "lucide-react",
+      "graficos": "recharts",
+      "lenguaje": "JavaScript (JSX, sin TypeScript)"
+    },
+    "backend": {
+      "proveedor": "Supabase",
+      "url": "https://ewotgkdjtgisxprsoddg.supabase.co",
+      "auth": "Supabase Auth (email/password, email verification)",
+      "db": "PostgreSQL via Supabase",
+      "storage": "Supabase Storage"
+    },
+    "pagos": {
+      "proveedor": "MercadoPago",
+      "sdk": "@mercadopago/sdk-react",
+      "public_key": "APP_USR-2ba12f7b-dfb4-4d52-8f19-662b7be99c57",
+      "modelo": "Suscripciones mensuales"
+    },
+    "deployment": {
+      "plataforma": "Vercel",
+      "config": "vercel.json (SPA rewrites + asset cache)",
+      "build_cmd": "npm run build",
+      "output_dir": "dist"
+    },
+    "ia": {
+      "nota": "OpenAI fue eliminado del proyecto. No hay dependencia de API key externa.",
+      "excel_mapping": "autoMapColumns() — mapeo automático de columnas sin IA",
+      "chat": "Deshabilitado — muestra mensaje 'no disponible'",
+      "audio": "Deshabilitado — muestra mensaje 'ingresar datos manualmente'"
+    }
+  },
+
+  "dependencias": {
+    "runtime": {
+      "@mercadopago/sdk-react": "^1.0.7",
+      "@supabase/supabase-js": "^2.38.4",
+      "framer-motion": "^10.16.4",
+      "jspdf": "^4.0.0",
+      "lucide-react": "^0.294.0",
+      "pdf-parse": "^1.1.1",
+      "pdfjs-dist": "^3.11.174",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-router-dom": "^6.20.0",
+      "recharts": "^2.10.3",
+      "tesseract.js": "^5.1.1",
+      "xlsx": "^0.18.5"
+    },
+    "dev": {
+      "vite": "^5.0.2",
+      "@vitejs/plugin-react": "^4.2.0",
+      "tailwindcss": "^3.3.5",
+      "autoprefixer": "^10.4.16",
+      "postcss": "^8.4.31"
+    }
+  },
+
+  "estructura_archivos": {
+    "src/": {
+      "App.jsx": "Rutador principal con todas las rutas y providers",
+      "main.jsx": "Entry point, ReactDOM.createRoot",
+      "index.css": "Estilos globales, CSS variables, utilities (btn-primary, btn-secondary, input-vercel, badge, glass, surface, bg-grid)",
+
+      "pages/": {
+        "Landing.jsx": "Página de inicio pública — compone Navbar + Hero + Features + Benefits + HowItWorks + DashboardPreview + CTA + Footer",
+        "Register.jsx": "Registro de usuarios nuevos",
+        "VerifyEmail.jsx": "Pantalla post-registro para verificar email",
+        "ForgotPassword.jsx": "Recuperación de contraseña",
+        "ResetPassword.jsx": "Reset de contraseña con token",
+        "Dashboard.jsx": "Panel principal (protegido + trial) — gestión de movimientos financieros",
+        "Chat.jsx": "Chat con asistente IA (deshabilitado sin API key)",
+        "Inventory.jsx": "Gestión de inventario de productos",
+        "Messaging.jsx": "Centro de mensajería",
+        "Premium.jsx": "Planes de suscripción y precios",
+        "Checkout.jsx": "Proceso de pago con MercadoPago",
+        "PaymentSuccess.jsx": "Confirmación de pago exitoso",
+        "PaymentFailure.jsx": "Pantalla de pago fallido",
+        "PaymentPending.jsx": "Pago pendiente",
+        "Subscription.jsx": "Gestión de suscripción activa del usuario",
+        "Perfil.jsx": "Perfil de usuario",
+        "TermsAndConditions.jsx": "Términos y condiciones",
+        "UserGuide.jsx": "Guía de uso del sistema",
+        "AdminSubscriptions.jsx": "Panel admin para gestionar suscripciones",
+        "AdminSecurity.jsx": "Panel admin de seguridad"
+      },
+
+      "components/": {
+        "Navbar.jsx": "Nav fijo con blur on scroll, links centrados, botones a la derecha",
+        "Hero.jsx": "Split layout: panel oscuro izquierda (propuesta valor + stats + CTAs) + formulario login derecha",
+        "Features.jsx": "Grid de características en cards tipo bento con modal de detalle",
+        "Benefits.jsx": "Sección de beneficios de la plataforma",
+        "HowItWorks.jsx": "Sección de pasos de uso",
+        "DashboardPreview.jsx": "Vista previa animada del dashboard",
+        "CTA.jsx": "Call to action final",
+        "Footer.jsx": "Footer minimal con links agrupados (Producto / Legal / Contacto)",
+        "ProtectedRoute.jsx": "HOC que redirige a '/' si no hay sesión activa",
+        "TrialCheck.jsx": "Verifica si el trial/suscripción está activo",
+        "MercadoPagoCheckout.jsx": "Integración SDK MercadoPago",
+        "Toast.jsx": "Notificaciones toast (animate-slideIn)",
+        "PremiumBadge.jsx": "Badge visual de plan premium",
+        "PremiumFeature.jsx": "Wrapper que muestra lock si el feature requiere premium",
+        "OnboardingTour.jsx": "Tour guiado para nuevos usuarios",
+
+        "common/": {
+          "Logo.jsx": "Ícono SVG negro + wordmark 'gestionar' en Geist",
+          "AudioRecorder.jsx": "Grabador de audio (funcionalidad deshabilitada sin OpenAI)",
+          "Tooltip.jsx": "Tooltip de ayuda genérico"
+        },
+
+        "chat/": {
+          "FloatingChat.jsx": "Chat flotante (muestra mensaje 'no disponible' sin API key)"
+        },
+
+        "dashboard/": {
+          "Movimientos.jsx": "Gestor principal de movimientos financieros",
+          "MovimientosVenta.jsx": "Formulario de carga de ventas",
+          "MovimientosCompra.jsx": "Formulario de carga de compras (actualiza stock automáticamente)",
+          "MovimientosGasto.jsx": "Formulario de carga de gastos",
+          "MovimientosAporte.jsx": "Formulario de aportes de capital",
+          "MovimientosRetiro.jsx": "Formulario de retiros",
+          "MovimientoDetalle.jsx": "Vista detalle de un movimiento",
+          "ExecutiveDashboard.jsx": "Dashboard ejecutivo con KPIs",
+          "CombinedDashboard.jsx": "Dashboard combinado",
+          "AnalisisVisual.jsx": "Gráficos y análisis visual con recharts",
+          "FinancialReports.jsx": "Reportes financieros exportables",
+          "FinancialIntelligence.jsx": "Inteligencia financiera y proyecciones",
+          "TaxManagement.jsx": "Gestión de impuestos ARCA/AFIP",
+          "TaxManagementNew.jsx": "Nueva versión de gestión impositiva",
+          "CompanyProfile.jsx": "Formulario de perfil de empresa",
+          "MyBusiness.jsx": "Vista 'Mi negocio'",
+          "ControlBoard.jsx": "Panel de control general",
+          "CommandBoard.jsx": "Panel de comandos rápidos",
+          "ExcelImport.jsx": "Importación de inventario desde Excel",
+          "UploadInvoices.jsx": "Carga de facturas en PDF",
+          "AIProjections.jsx": "Proyecciones financieras",
+          "DolarCard.jsx": "Tarjeta con cotización dólar",
+          "DolarWidget.jsx": "Widget cotización dólar (API externa)",
+          "Sales.jsx": "Módulo de ventas",
+          "Remitos.jsx": "Generación de remitos",
+          "ModalEliminar.jsx": "Modal de confirmación de eliminación",
+          "CreditCalculator.jsx": "Calculadora de créditos",
+          "FinancialTooltip.jsx": "Tooltips con info financiera",
+          "AdaptiveWrapper.jsx": "Wrapper responsivo adaptativo",
+          "PowerBIIntegration.jsx": "Integración con Power BI (próximamente)"
+        },
+
+        "inventory/": {
+          "ProductList.jsx": "Listado de productos del inventario",
+          "EnhancedProductTable.jsx": "Tabla avanzada de productos con filtros",
+          "ProductForm.jsx": "Formulario de alta/edición de producto",
+          "CategoryManager.jsx": "Gestión de categorías de productos",
+          "BulkImport.jsx": "Importación masiva de productos",
+          "SmartBulkImport.jsx": "Importación inteligente con mapeo de columnas"
+        },
+
+        "messaging/": {
+          "MessagingCenter.jsx": "Centro de mensajería"
+        },
+
+        "subscription/": {
+          "SubscriptionInfo.jsx": "Info del plan activo del usuario",
+          "PaymentHistory.jsx": "Historial de pagos"
+        }
+      },
+
+      "context/": {
+        "AuthContext.jsx": {
+          "descripcion": "Gestión de autenticación con Supabase",
+          "estado": ["user", "loading"],
+          "metodos": ["signUp(email, password, fullName)", "signIn(email, password)", "signOut()"],
+          "hook": "useAuth()"
+        },
+        "DataContext.jsx": {
+          "descripcion": "Datos globales de la app: empresa, facturas, inventario",
+          "estado": ["companyData", "invoices", "inventoryItems", "loading", "tableExists"],
+          "metodos_empresa": ["loadCompanyData()", "saveCompanyData(companyInfo)"],
+          "metodos_facturas": ["loadInvoices()", "saveInvoice(invoice)", "addInvoice(invoice)", "updateInvoice(id, data)", "deleteInvoice(id)"],
+          "metodos_inventario": ["loadInventoryItems()", "addInventoryItem(item)", "updateInventoryItem(id, data)", "updateProductStock(productId, qty, 'add'|'subtract')", "findOrCreateProduct(productData)", "getInventoryProducts()"],
+          "hook": "useData()",
+          "nota": "deleteInvoice() revierte automáticamente el stock cuando se elimina una compra o venta"
+        }
+      },
+
+      "hooks/": {
+        "useDatabase.js": "Hook para operaciones de base de datos",
+        "useSubscription.js": "Hook para gestión de suscripción activa"
+      },
+
+      "lib/": {
+        "supabase.js": "Cliente Supabase inicializado con VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY"
+      },
+
+      "services/": {
+        "aiService.js": "STUB — todas las funciones retornan error 'no disponible'. isOpenAIConfigured() siempre false.",
+        "openaiService.js": "STUB — sendMessageToGPT() retorna error. generateSuggestedQuestions() funciona sin IA.",
+        "aiInvoiceProcessor.js": "Procesa facturas usando solo OCR/PDF básico, sin IA. detectDuplicates() y normalizeInvoiceData() funcionan.",
+        "excelAnalyzer.js": "analyzeExcelStructure() usa solo autoMapColumns() — mapeo por keywords en nombre de columna.",
+        "invoiceProcessor.js": "Extracción de datos de PDF/imágenes con pdfjs-dist y tesseract.js",
+        "database.js": "CRUD genérico contra Supabase",
+        "audioService.js": "Grabación de audio del browser (MediaRecorder API)",
+        "mercadopagoService.js": "Integración con API de MercadoPago para crear suscripciones",
+        "subscriptionService.js": "Lógica de planes, trial, vigencia de suscripción"
+      },
+
+      "utils/": {
+        "errorMessages.js": "Traducción de errores de Supabase al español. translateDatabaseError(), createUserFriendlyError(), ERROR_MESSAGES",
+        "pdfGenerator.js": "Generación de comprobantes PDF con jsPDF"
+      }
+    }
+  },
+
+  "rutas": {
+    "publicas": {
+      "/": "Landing (Hero con login + secciones de marketing)",
+      "/register": "Registro de usuario",
+      "/verify-email": "Verificación de email post-registro",
+      "/forgot-password": "Recuperación de contraseña",
+      "/reset-password": "Reset con token",
+      "/premium": "Planes y precios",
+      "/checkout": "Proceso de pago MercadoPago",
+      "/payment/success": "Pago exitoso",
+      "/payment/failure": "Pago fallido",
+      "/payment/pending": "Pago pendiente",
+      "/terminos": "Términos y condiciones",
+      "/instrucciones": "Guía de usuario"
+    },
+    "protegidas_requieren_auth": {
+      "/dashboard": "Panel principal + requiere trial activo (TrialCheck)",
+      "/chat": "Chat IA + requiere trial activo (TrialCheck)",
+      "/subscription": "Gestión de suscripción",
+      "/perfil": "Perfil de usuario",
+      "/admin/suscripciones": "Admin de suscripciones",
+      "/admin/security": "Admin de seguridad"
+    }
+  },
+
+  "base_de_datos": {
+    "proveedor": "Supabase (PostgreSQL)",
+    "tablas": {
+      "companies": {
+        "descripcion": "Datos de la empresa del usuario",
+        "columnas": ["id", "user_id", "name", "cuit", "business_type", "address", "locality", "city", "province", "country", "phone", "email", "website", "industry", "fiscal_category", "fiscal_year", "currency"],
+        "relacion": "1 empresa por usuario (user_id único)"
+      },
+      "invoices": {
+        "descripcion": "Facturas y movimientos financieros (ventas, compras, gastos, aportes, retiros)",
+        "columnas": ["id", "user_id", "company_id", "invoice_number", "invoice_type ('income'|'expense')", "invoice_date", "description", "amount", "category", "file_name", "processed", "taxes (jsonb)", "metadata (jsonb)", "is_active"],
+        "metadata_movimientos": {
+          "movementType": "'venta'|'compra'|'gasto'|'aporte'|'retiro'",
+          "productos": "array de {productoId, nombre, cantidad, precioUnitario}",
+          "cliente": "nombre del cliente (ventas)",
+          "provider": "nombre del proveedor (compras)"
+        }
+      },
+      "products": {
+        "descripcion": "Inventario de productos",
+        "columnas": ["id", "user_id", "name", "description", "category", "category_id", "brand", "model", "unit_cost", "sale_price", "wholesale_price", "current_stock", "min_stock", "is_active", "created_at", "updated_at"],
+        "nota": "current_stock se actualiza automáticamente al registrar compras/ventas. No puede ser negativo."
+      },
+      "profiles": {
+        "descripcion": "Perfil extendido del usuario (sincronizado con auth.users)",
+        "nota": "Existe una migración para corregir columnas faltantes (commit 0bad47e)"
+      }
+    },
+    "nota_tablas": "Si 'invoices' no existe, DataContext.tableExists = false y muestra instrucciones de setup"
+  },
+
+  "design_system": {
+    "fuente": "Geist (sans) + Geist Mono (mono) — Google Fonts",
+    "paleta": {
+      "base": "neutral-950 (#0a0a0a) sobre neutral-0 (#ffffff)",
+      "neutros": "neutral-50 a neutral-950 (escala de 11 pasos)",
+      "accent_blue": "#0070f3",
+      "error": "#e00",
+      "warning": "#f5a623"
+    },
+    "css_variables": {
+      "--color-background": "#ffffff",
+      "--color-foreground": "#000000",
+      "--color-accents-1 a 8": "escala de grises",
+      "--font-sans": "Geist",
+      "--font-mono": "Geist Mono"
+    },
+    "utilities_custom": {
+      "btn-primary": "Botón negro con texto blanco — hover bg-neutral-800",
+      "btn-secondary": "Botón blanco con borde — hover bg-neutral-50",
+      "input-vercel": "Input con borde neutral-300, focus neutral-950 + ring",
+      "badge": "Pill pequeña con borde neutral-200",
+      "glass": "bg white/80 + backdrop-blur + border semitransparente",
+      "surface": "bg-white border border-neutral-200 rounded-lg",
+      "surface-hover": "hover:border-neutral-400 hover:shadow-card-hover",
+      "bg-grid": "Fondo con dot grid radial (estilo Vercel)",
+      "text-gradient": "Gradiente negro oscuro en texto",
+      "text-gradient-blue": "Gradiente azul Vercel en texto"
+    },
+    "sombras": {
+      "card": "0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04)",
+      "card-hover": "0 0 0 1px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.08)",
+      "vercel": "0 4px 40px rgba(0,0,0,.08)"
+    },
+    "animaciones": {
+      "fade-in": "fadeIn 0.4s ease-out",
+      "slide-up": "slideUp 0.4s ease-out (translateY 12px → 0)",
+      "slide-in": "slideIn 0.3s ease-out (translateX 100% → 0)",
+      "shimmer": "shimmer 2s linear infinite (background-position)"
+    },
+    "tracking": "Headings: letter-spacing -0.03em. Body: -0.01em.",
+    "border_radius": "rounded-lg (8px) como default. rounded-xl para cards grandes."
+  },
+
+  "patrones_de_codigo": {
+    "estado_global": "React Context (AuthContext + DataContext). No se usa Redux ni Zustand.",
+    "data_fetching": "Directo a Supabase desde los contextos. No hay capa de API propia en el frontend.",
+    "autenticacion": "useAuth() — user, loading, signIn, signOut, signUp",
+    "datos": "useData() — companyData, invoices, inventoryItems + métodos CRUD",
+    "proteccion_rutas": "<ProtectedRoute> wrappea rutas privadas. <TrialCheck> agrega verificación de suscripción.",
+    "errores": "errorMessages.js — traducción de errores Supabase al español",
+    "notificaciones": "Toast.jsx — alert estilo toast con animate-slideIn",
+    "formularios": "useState local por componente, sin react-hook-form ni Formik",
+    "iconos": "lucide-react — importar solo lo necesario: import { X, ArrowRight } from 'lucide-react'",
+    "estilos": "Tailwind utility classes. Clases custom en index.css. NO styled-components, NO CSS modules.",
+    "convenciones": {
+      "componentes": "PascalCase, archivos .jsx",
+      "servicios": "camelCase, archivos .js",
+      "no_typescript": "El proyecto es JS puro, sin TypeScript",
+      "no_comentarios_obvios": "Solo comentar WHY no obvious. No comentar WHAT.",
+      "imports_orden": "React → librerías externas → contextos → componentes → servicios → utils"
+    }
+  },
+
+  "variables_entorno": {
+    "requeridas": {
+      "VITE_SUPABASE_URL": "https://ewotgkdjtgisxprsoddg.supabase.co",
+      "VITE_SUPABASE_ANON_KEY": "La anon key de Supabase (ver dashboard)"
+    },
+    "opcionales": {
+      "VITE_MERCADOPAGO_PUBLIC_KEY": "APP_USR-2ba12f7b-dfb4-4d52-8f19-662b7be99c57",
+      "VITE_API_URL": "http://localhost:3001/api (server local si se usa)"
+    },
+    "eliminadas": {
+      "VITE_OPENAI_API_KEY": "Eliminada — OpenAI fue removido del proyecto"
+    },
+    "nota": "Crear archivo .env en la raíz (no hay .env en el repo, solo .env.example)"
+  },
+
+  "modulos_principales": {
+    "autenticacion": {
+      "descripcion": "Email/password con Supabase Auth. Verificación de email obligatoria.",
+      "flujo": "Register → VerifyEmail → Login (Hero) → Dashboard",
+      "recuperacion": "ForgotPassword → email con link → ResetPassword"
+    },
+    "dashboard_financiero": {
+      "descripcion": "Módulo central. Registro de 5 tipos de movimientos: venta, compra, gasto, aporte, retiro.",
+      "componentes_clave": ["Movimientos.jsx", "MovimientosVenta.jsx", "MovimientosCompra.jsx", "MovimientosGasto.jsx", "MovimientosAporte.jsx", "MovimientosRetiro.jsx"],
+      "logica_stock": "CompraRegistrada → updateProductStock(+). VentaRegistrada → updateProductStock(-). Eliminación → revierte automáticamente.",
+      "reportes": "FinancialReports.jsx, AnalisisVisual.jsx con recharts, pdfGenerator.js"
+    },
+    "inventario": {
+      "descripcion": "CRUD de productos con stock, costos y precios.",
+      "importacion": "Excel (.xlsx) via SmartBulkImport.jsx + excelAnalyzer.js (mapeo automático de columnas)",
+      "tabla_db": "products"
+    },
+    "suscripciones": {
+      "descripcion": "Planes de pago con MercadoPago. Trial gratuito disponible.",
+      "flujo": "Premium.jsx → Checkout.jsx → MercadoPago → PaymentSuccess/Failure/Pending",
+      "verificacion": "TrialCheck.jsx verifica si el usuario tiene acceso activo"
+    },
+    "chat_ia": {
+      "descripcion": "DESHABILITADO. Muestra mensaje de no disponibilidad.",
+      "nota": "Para habilitarlo: configurar un servicio de IA alternativo en openaiService.js"
+    }
+  },
+
+  "pendiente_y_mejoras_posibles": {
+    "features_proximas": [
+      "App móvil (marcada como coming soon)",
+      "Automatización de mensajes (WhatsApp/Email)",
+      "Recomendaciones de inversión",
+      "Integración Power BI"
+    ],
+    "deuda_tecnica": [
+      "Bundle principal (index.js) pesa 2.1MB — code splitting con dynamic import()",
+      "pdfjs-dist usa eval() — considerar alternativa",
+      "No hay tests automatizados",
+      "No hay error boundaries en la app",
+      "DataContext hace múltiples fetches al montar — podría optimizarse con SWR o React Query"
+    ],
+    "mejoras_ux": [
+      "Loading states más consistentes entre componentes",
+      "Skeleton screens en lugar de spinners",
+      "Paginación en listado de facturas e inventario",
+      "Filtros y búsqueda en Movimientos"
+    ],
+    "seo_y_marketing": [
+      "Landing page podría tener más secciones (testimonios, precios destacados)",
+      "OG images dinámicas",
+      "Sitemap.xml"
+    ]
+  },
+
+  "comandos": {
+    "desarrollo": "npm run dev",
+    "build": "npm run build",
+    "preview": "npm run preview",
+    "instalar": "npm install"
+  },
+
+  "equipo": {
+    "Eugenio": "+54 9 3467 41-2501",
+    "Franco": "+54 9 3515 63-7053 — fran.d.galvan@gmail.com (dueño del repo)",
+    "Ignacio": "+54 9 3472 58-7090",
+    "ubicacion": "Córdoba, Argentina"
+  }
+}
